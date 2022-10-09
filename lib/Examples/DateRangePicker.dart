@@ -1,5 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -31,6 +33,7 @@ class _DatePickerState extends State<DatePicker> {
     }
   }
 
+  //Pop up when delete Icon is pressed
   Widget _popUpDialog(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(
@@ -57,14 +60,19 @@ class _DatePickerState extends State<DatePicker> {
                 });
               },
               textColor: Theme.of(context).primaryColor,
-              child: Text('Yes'),
+              child: Text(
+                'Yes',
+                style: TextStyle(color: Colors.red),
+              ),
             ),
             FlatButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
               textColor: Theme.of(context).primaryColor,
-              child: Text('Close'),
+              child: Text(
+                'No',
+              ),
             )
           ],
         )
@@ -75,13 +83,20 @@ class _DatePickerState extends State<DatePicker> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text('Date Picker'),
+          centerTitle: true,
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: openDateRange,
           child: const Icon(Icons.date_range),
         ),
         body: selectedRange == null
             ? Center(
-                child: Text('No Date to show. Press the button to select one.'),
+                child: Text(
+                  'No Date to show. Press the button to select one.',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                ),
               )
             : SizedBox(
                 width: double.infinity,
@@ -90,18 +105,24 @@ class _DatePickerState extends State<DatePicker> {
                   Center(
                     child: Card(
                       color: Colors.purple,
-                      margin: EdgeInsets.only(top: 100, bottom: 200),
+                      margin: EdgeInsets.only(top: 100, bottom: 220),
                       elevation: 2,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
+                          Text(
+                            'Date Picked',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 25),
+                          ),
+                          SizedBox(height: 30),
                           Container(
                             width: 290,
                             height: 50,
                             decoration: BoxDecoration(
                                 color: Colors.deepPurpleAccent,
-                                borderRadius: BorderRadius.circular(20)),
+                                borderRadius: BorderRadius.zero),
                             child: Center(
                               child: Text(
                                 "Start date: ${selectedRange?.start.toString().split(' ')[0]}",
@@ -121,8 +142,8 @@ class _DatePickerState extends State<DatePicker> {
                             width: 290,
                             height: 50,
                             decoration: BoxDecoration(
-                                color: Colors.deepOrangeAccent,
-                                borderRadius: BorderRadius.circular(20)),
+                                color: Colors.orange,
+                                borderRadius: BorderRadius.zero),
                             child: Center(
                               child: Text(
                                 "End date: ${selectedRange?.end.toString().split(' ')[0]}",
@@ -136,7 +157,7 @@ class _DatePickerState extends State<DatePicker> {
                             ),
                           ),
                           const SizedBox(
-                            height: 80,
+                            height: 40,
                           ),
                           GestureDetector(
                             onTap: () {
