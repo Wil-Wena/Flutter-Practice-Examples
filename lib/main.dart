@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice_examples/Examples/DateRangePicker.dart';
+import 'package:flutter_practice_examples/Examples/Search_a_List.dart';
 import 'package:flutter_practice_examples/Examples/StepperWidget.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: const DatePicker(),
+      home: const SearchPage(),
     );
   }
 }
